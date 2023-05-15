@@ -2,24 +2,33 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
-func main() {
-	switch module := 4 % 2; module {
-	case 0:
-		fmt.Println("Even")
-	default:
-		fmt.Println("Odd")
-	}
+func longFunction() {
+	time.Sleep(4 * time.Second)
+	fmt.Println("Hi")
+}
 
-	// Conditionless
-	value := -200
-	switch {
-	case value > 100:
-		fmt.Println("Greater than 100")
-	case value < 0:
-		fmt.Println("Less than 0")
-	default:
-		fmt.Println("No condition")
+func main() {
+	// Defer
+	defer longFunction()
+	time.Sleep(2 * time.Second)
+	fmt.Println("world")
+
+	// Continue and break
+	for i := 0; i < 10; i++ {
+		// Continue
+		if i == 2 {
+			fmt.Println("It's 2")
+			continue
+		}
+
+		if i == 8 {
+			fmt.Println("BREAK")
+			break
+		}
+
+		fmt.Println(i)
 	}
 }
