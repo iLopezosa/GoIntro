@@ -24,4 +24,11 @@ func main() {
 	var d bool
 
 	fmt.Println(a, b, c, d)
+
+	fmt.Println(squareArea(2.12))
+}
+
+// Area of a square
+func squareArea(sideLen float64) float64 {
+	return sideLen * sideLen
 }
