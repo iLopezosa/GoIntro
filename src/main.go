@@ -2,33 +2,24 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"strconv"
 )
 
 func main() {
-	val1 := 1
-	val2 := 2
-
-	if val1 == 1 {
-		fmt.Println("It is 1")
-	} else {
-		fmt.Println("It is NOT 1")
+	switch module := 4 % 2; module {
+	case 0:
+		fmt.Println("Even")
+	default:
+		fmt.Println("Odd")
 	}
 
-	// AND
-	if val1 == 1 && val2 == 2 {
-		fmt.Println("It is TRUE, AND")
+	// Conditionless
+	value := -200
+	switch {
+	case value > 100:
+		fmt.Println("Greater than 100")
+	case value < 0:
+		fmt.Println("Less than 0")
+	default:
+		fmt.Println("No condition")
 	}
-
-	if val1 == 0 || val2 == 3 {
-		fmt.Println("It is TRUE, OR")
-	}
-
-	// Convert text to integer
-	value, err := strconv.Atoi("69t")
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(value)
 }
