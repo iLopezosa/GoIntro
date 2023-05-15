@@ -3,32 +3,25 @@ package main
 import "fmt"
 
 func main() {
-	// Constants declaration
-	const pi float64 = 3.14159265359
-	const pi2 = 3.1416
+	const hi = "Hello"
+	const world = "World!"
 
-	fmt.Println("pi:", pi)
-	fmt.Println("pi2:", pi2)
+	// Println()
+	fmt.Println(hi, world)
+	fmt.Println(hi, world)
 
-	// Variables declaration
-	base := 12          // infers the type of variable
-	var height int = 13 // explicit type declaration
-	var area int        // zero value
+	// Printf()
+	platzi := "Platzi"
+	courses := 500
+	fmt.Printf("%s has more than %d courses\n", platzi, courses)
+	fmt.Printf("%v has more than %d courses\n", platzi, courses)
 
-	fmt.Println(base, height, area)
+	// Sprintf()
+	message := fmt.Sprintf("%s has more than %d courses", platzi, courses)
+	fmt.Println(message)
 
-	// Zero values
-	var a int
-	var b float64
-	var c string
-	var d bool
+	// Data types
+	fmt.Printf("message: %T\n", message)
+	fmt.Printf("courses: %T\n", courses)
 
-	fmt.Println(a, b, c, d)
-
-	fmt.Println(squareArea(2.12))
-}
-
-// Area of a square
-func squareArea(sideLen float64) float64 {
-	return sideLen * sideLen
 }
