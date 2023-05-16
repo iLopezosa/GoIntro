@@ -4,21 +4,17 @@ import (
 	"fmt"
 )
 
+type car struct {
+	brand string
+	year  uint16
+}
+
 func main() {
-	m := make(map[string]uint8)
+	myCar := car{brand: "Toyota", year: 1995}
+	fmt.Println(myCar)
 
-	m["Joseph"] = 0
-	m["Francis"] = 20
-	m["Anne"] = 32
-
-	fmt.Println(m)
-
-	// Read map
-	for k, v := range m {
-		fmt.Println(k, v)
-	}
-
-	// Get one value
-	value, found := m["Joseph"]
-	fmt.Println(value, found)
+	// Alt
+	var otherCar car
+	otherCar.brand = "Honda"
+	fmt.Println(otherCar)
 }
