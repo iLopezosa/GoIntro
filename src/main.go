@@ -3,40 +3,26 @@ package main
 import (
 	"fmt"
 	"math/rand"
-	"sync"
 	"time"
 )
 
-func say(txt string, wg *sync.WaitGroup) {
+func say(txt string, c chan<- string) {
 	init := time.Now()
-
-	defer wg.Done()
-
 	time.Sleep(time.Second * time.Duration(rand.Float64()*5))
-	fmt.Println(txt, time.Since(init))
+	txt = fmt.Sprintf("%s %s", txt, time.Since(init))
+	c <- txt
 }
 
 func main() {
-	var wg sync.WaitGroup
+	c := make(chan string, 3)
 
 	fmt.Println("Hi")
-	wg.Add(3)
 
-	go say("World 1", &wg)
-	go say("World 2", &wg)
-	go say("World 3", &wg)
+	go say("bye1", c)
+	go say("bye2", c)
+	go say("bye3", c)
 
-	wg.Wait()
-
-	go func(text string) {
-		fmt.Println(text)
-	}("bye")
-	go func(text string) {
-		fmt.Println(text)
-	}("bye")
-	go func(text string) {
-		fmt.Println(text)
-	}("bye")
-
-	time.Sleep(time.Second * 1)
+	fmt.Println(<-c)
+	fmt.Println(<-c)
+	fmt.Println(<-c)
 }
