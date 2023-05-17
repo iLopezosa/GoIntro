@@ -1,21 +1,39 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-type pc struct {
-	ram   int
-	disk  int
-	brand string
+type shape interface {
+	area() float64
 }
 
-func (myPC pc) String() string {
-	return fmt.Sprintf("PC: RAM %d GB, Disk space %d GB, Brand %s", myPC.ram, myPC.disk, myPC.brand)
+type square struct {
+	width float64
+}
+type rectangle struct {
+	width  float64
+	height float64
+}
+
+func (s square) area() float64 {
+	return s.width * s.width
+}
+
+func (r rectangle) area() float64 {
+	return r.height * r.width
+}
+
+func calculate(s shape) {
+	fmt.Println("Area:", s.area())
 }
 
 func main() {
-	myPC := pc{ram: 8, disk: 512, brand: "asus"}
-	fmt.Println(myPC)
+	mySquare := square{width: 2}
+	myRectangle := rectangle{width: 2, height: 4}
 
+	calculate(mySquare)
+	calculate(myRectangle)
+
+	// Interface list
+	myInterface := []interface{}{"Hi", 12, 3.14}
+	fmt.Println(myInterface...)
 }
