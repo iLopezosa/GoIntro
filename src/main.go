@@ -10,28 +10,12 @@ type pc struct {
 	brand string
 }
 
-func (myPC pc) ping() {
-	fmt.Println(myPC.brand, "Pong")
-}
-
-func (myPC *pc) duplidateRAM() {
-	myPC.ram *= 2
+func (myPC pc) String() string {
+	return fmt.Sprintf("PC: RAM %d GB, Disk space %d GB, Brand %s", myPC.ram, myPC.disk, myPC.brand)
 }
 
 func main() {
-	a := 50
-	b := &a
-	c := b
-
-	fmt.Println(a, &a, b, *b, *c)
-
-	*b = 100
-	fmt.Println(a, &a, b, *b, *c)
-
 	myPC := pc{ram: 8, disk: 512, brand: "asus"}
 	fmt.Println(myPC)
 
-	myPC.ping()
-	myPC.duplidateRAM()
-	fmt.Println(myPC)
 }
