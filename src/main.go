@@ -1,39 +1,42 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+	"sync"
+	"time"
+)
 
-type shape interface {
-	area() float64
-}
+func say(txt string, wg *sync.WaitGroup) {
+	init := time.Now()
 
-type square struct {
-	width float64
-}
-type rectangle struct {
-	width  float64
-	height float64
-}
+	defer wg.Done()
 
-func (s square) area() float64 {
-	return s.width * s.width
-}
-
-func (r rectangle) area() float64 {
-	return r.height * r.width
-}
-
-func calculate(s shape) {
-	fmt.Println("Area:", s.area())
+	time.Sleep(time.Second * time.Duration(rand.Float64()*5))
+	fmt.Println(txt, time.Since(init))
 }
 
 func main() {
-	mySquare := square{width: 2}
-	myRectangle := rectangle{width: 2, height: 4}
+	var wg sync.WaitGroup
 
-	calculate(mySquare)
-	calculate(myRectangle)
+	fmt.Println("Hi")
+	wg.Add(3)
 
-	// Interface list
-	myInterface := []interface{}{"Hi", 12, 3.14}
-	fmt.Println(myInterface...)
+	go say("World 1", &wg)
+	go say("World 2", &wg)
+	go say("World 3", &wg)
+
+	wg.Wait()
+
+	go func(text string) {
+		fmt.Println(text)
+	}("bye")
+	go func(text string) {
+		fmt.Println(text)
+	}("bye")
+	go func(text string) {
+		fmt.Println(text)
+	}("bye")
+
+	time.Sleep(time.Second * 1)
 }
